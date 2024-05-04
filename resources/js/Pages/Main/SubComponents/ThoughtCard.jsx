@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect, useContext} from "react";
-import {motion, AnimatePresence, useScroll, useTransform} from 'framer-motion'
+import {motion, AnimatePresence, useScroll, useTransform, inView} from 'framer-motion'
 import { FaThumbsUp } from "react-icons/fa6";
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { IoChatbox } from "react-icons/io5";
@@ -13,13 +13,19 @@ function ThoughtCard({thought}) {
         target: ref,
         offset: ["0 1", "1.33 1"],
     });
-    const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
+    const scaleProgress = useTransform(scrollYProgress, [0, 1,], [0.6, 1]);
     const  opacityProgress = useTransform(scrollYProgress, [0, 1], [.4, 1]);
+
+    const handleCardLeave = () => {
+        console.log("handleCardLeave")
+    }
+
 
     const test = `https://robohash.org/${thought.user.email}.png`
     return(
         <>
         <motion.div 
+        
         ref={ref}
         style={{  
             scale: scaleProgress,
@@ -32,7 +38,6 @@ function ThoughtCard({thought}) {
         animate={{ 
             rotate: "0deg",
         }}
-
         transition={{ 
             type:"spring",
             duration: .5,

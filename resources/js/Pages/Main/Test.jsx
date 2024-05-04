@@ -8,8 +8,8 @@ export default function Test(){
     const {currentUSer} = usePage().props;
     const {thoughts} = usePage().props
     useEffect(() => {
-        console.log(thoughts)
-        console.log(value)
+       // console.log(thoughts)
+        //console.log(value)
     })
     return(
         <>

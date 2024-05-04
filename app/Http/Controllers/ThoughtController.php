@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Thought;
-use App\models\Category;
-use App\models\Comment;
-use App\models\Like;
-use App\models\Invite;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Like;
+use App\Models\Invite;
 use App\Events\MessageNotification;
 use App\Events\InviteEvent;
 use Illuminate\Support\Facades;
@@ -171,6 +171,28 @@ class ThoughtController extends Controller
     public function createThought()
     {
         $categories = Category::all();
+        if($categories->empty()){
+            $defaultCategories = [
+                'random' => 'Random',
+                'comedy' => 'Comedy',
+                'sad' => 'Sad',
+                'entertainment' => 'Entertainment',
+                'politics' => 'Politics',
+                'health' => 'Health',
+                'music' => 'Music',
+                'arts' => 'Arts',
+                'sports' => 'Sports',
+                'science' => 'Science',
+                'tech' => 'Tech',
+                'business' => 'Business',
+            ];
+
+            foreach($defaultCategories as $key => $category){
+                Category::create([
+                    'category' => $category,
+                ]);
+            }
+        }
         $currentUser = Auth::user();
         //$selectedUser = session()->get('selected_user');
         return Inertia::render('Main/CreateThought', [
