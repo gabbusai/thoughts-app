@@ -39,8 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/thoughts/home', [ThoughtController::class, 'index'])->name('thoughts.home');
     Route::get('/thoughts/category/{category}', [ThoughtController::class, 'sortByCategory'])->name('thoughts.sortByCategory');
     Route::get('/thoughts/users/{user}', [ThoughtController::class, 'viewUser'])->name('thoughts.viewUser');
-    Route::match(['GET', 'POST'],'/thoughts/search/%{search}%', [ThoughtController::class, 'searchThought'])->name('thoughts.search');
-
+    Route::match(['GET', 'POST'],'/thoughts/search/{search}', [ThoughtController::class, 'searchThought'])->name('thoughts.search');
+    //Route::post('/thoughts/search/{search}', [ThoughtController::class, 'searchThought'])->name('thoughts.search');
 
 
     //see your notifications/invite

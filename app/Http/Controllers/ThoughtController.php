@@ -106,9 +106,12 @@ class ThoughtController extends Controller
         ->orderBy('created_at', 'desc') // Optional: Sort by latest first
         ->get(); // Eager load all records, no pagination for testing
 
-        return Inertia::render('Main/Index', [
+        $searchString = $category->category;
+
+        return Inertia::render('Main/SearchIndex', [
             'currentUser' => $currentUser,
             'thoughts' => $thoughts,
+            'searchString' => $searchString,
             //'selectedUser' => $selectedUser
         ]);
     }
@@ -141,7 +144,6 @@ class ThoughtController extends Controller
             'currentUser' => $currentUser,
             'thoughts' => $thoughts,
             'searchString' => $searchString
-            //'selectedUser' => $selectedUser
         ]);
 
     }
